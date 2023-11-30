@@ -8,7 +8,7 @@ load_mmseqs(
   file,
   frag_thr = 3,
   sup_thr = 0.7,
-  tax_ranks = c("kingdom", "phylum", "class", "order", "family", "genus", "species"),
+  tax_ranks = taxonomy_ranks,
   include_name = FALSE
 )
 }

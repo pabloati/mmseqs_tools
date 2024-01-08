@@ -20,6 +20,10 @@ load_mmseqs <- function(file,
                         sup_thr = 0.7,
                         tax_ranks = taxonomy_ranks,
                         include_name = FALSE) {
+  # Include a check that the given file exists
+  if (!file.exists(file)) {
+    stop("File does not exist!")
+  }
 
   # Initial loading of file and setting up the right column names and taxonomy
   main.df <-
@@ -40,8 +44,8 @@ load_mmseqs <- function(file,
 
   # In case the sample name should be included
   if (include_name == TRUE) {
-    # Extrats the sample name from the file name (it is always the same by default)
-    sample_name <- stringr::str_split(basename(file),"_",simplify = TRUE)[1]
+    # Extracts the sample name from the file name (it is always the same by default)
+    sample_name <- gsub("_lca.tsv","",basename(file))
     main.df <- dplyr::mutate(main.df,sample=sample_name)
   }
   return(main.df)
